@@ -31,3 +31,6 @@
 # MessageのSubscribingについて
 - トピック名を受け取り、受信したメッセージのチャネルを返す
 - トピックが何を意味するかはPubSubの実装に依存する
+- `Subscriber`の責務は`Ack`と`Nack`を処理すること
+- メッセージのstorage/brokerへのAck/offsetはWatermillのメッセージからのAckの後に送らなければならない
+- `Close`は全てのサブスクリプションとその出力チャネルを閉じ、必要な時にオフセットなどをフラッシュする
