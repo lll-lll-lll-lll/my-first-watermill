@@ -21,6 +21,11 @@
 
 # Publisher
 [公式Doc](https://watermill.io/docs/pub-sub/#publisher)
+- ほとんどのpublisherはアトミックをサポートしていない。これはあるmessageがpublishに失敗した時に次のメッセージがpublishできないから
+- 同期、非同期両方可能。実装に依存する
+- publisherが非同期の場合`Close`は未送信のメッセージをフラッシュする必要がある<br>
+- **publisherの閉じ忘れには注意する必要がある**
+- そうしないとメッセージの一部が失われる可能性がある
 
 
 # MessageのSubscribingについて

@@ -12,7 +12,7 @@ import (
 func main(){
 	pubSub := gochannel.NewGoChannel(
 		gochannel.Config{},
-		// logをdebugとtrace両方falseにする
+		// logをdebugとtrace両方無効にする
 		watermill.NewStdLogger(false, false),
 		)
 	message, err := pubSub.Subscribe(context.Background(), "example.topic")
@@ -29,3 +29,16 @@ func process(messages <- chan *message.Message){
 		msg.Ack()
 	}
 }
+
+
+func publishMessages(publisher message.Publisher) {
+	for {
+		// messageのUUIDはなんでもよくて推奨はUUID。デバックに役に立つ。
+		msg := message.NewMessage(watermill.NewUUID(), []byte("My First Watermill"))
+		if err := publisher.Publish("example.topic", msg); err != nil {
+			panic(err)
+		}
+		time.Sleep(time.Second)
+	}
+}
+
