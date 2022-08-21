@@ -8,13 +8,16 @@
 - PubSub ライブラリは複雑な機能を持っているが,WatermillではPublisherとSubscriberの２つのインターフェースを実装するだけ
 
 ## Wattermillのコアは`Message`
--  http pkgでhttp.Requestが重要なように、どこでもMessage sturctは何かしら関わっている
-  - `Publisher`が発信する
-  - `Subscriber`が受信する
-  - メッセージの処理が完了したら、`Ack()`を送信する
-  - 処理が失敗したら`Nack()`を送信する
-  - `Acks()`と`Nacks()`は`Subscribers`に処理される
-    - デフォでは`Subscribers`が`Ack`と`Nack`を待つ
+- http pkgでhttp.Requestが重要なように、どこでもMessage sturctは何かしら関わっている
+- `Publisher`が発信する
+- `Subscriber`が受信する
+- メッセージの処理が完了したら、`Ack()`を送信する
+- 処理が失敗したら`Nack()`を送信する
+- `Acks()`と`Nacks()`は`Subscribers`に処理される
+  - デフォでは`Subscribers`が`Ack`と`Nack`を待つ
+- `NewMessage()`はペイロードとしてバイトのスライスを想定している
+    - バイトにシリアライズできるなら、json, protobuf, Avro, gobなど使える
+
 
 # Publisher
 [公式Doc](https://watermill.io/docs/pub-sub/#publisher)
